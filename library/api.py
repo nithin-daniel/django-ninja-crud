@@ -19,3 +19,9 @@ def book_list(request):
 def create_book(request,payload:BookInSchema):
     book = Book.objects.create(**payload.dict())
     return book
+
+@api.delete("/books/{book_id}")
+def delete_book(request,book_id:int):
+    book = get_object_or_404(Book, id=book_id)
+    book.delete()
+    return {"success":True}
