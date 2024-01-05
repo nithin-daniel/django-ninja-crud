@@ -1,11 +1,15 @@
-from ninja import Schema
+from ninja import Schema,ModelSchema
+from books.models import Author,Book
 
-
-class BookSchema(Schema):
-    id : int
-    title : str
-    author_id : int
-    isbn : str
+class AuthorSchema(ModelSchema):
+    class Meta:
+        model = Author
+        fields = "__all__"
+        
+class BookSchema(ModelSchema):
+    class Meta:
+        model = Book
+        fields = "__all__"
 
 class BookInSchema(Schema):
     id:int
