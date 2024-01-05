@@ -1,7 +1,7 @@
 from ninja import NinjaAPI
 from django.shortcuts import get_object_or_404
 from books.models import Book
-from .schema import BookSchema,BookInSchema
+from .schema import BookSchema,BookInSchema,BookPatchSchema
 from typing import List
 
 api = NinjaAPI()
@@ -25,3 +25,11 @@ def delete_book(request,book_id:int):
     book = get_object_or_404(Book, id=book_id)
     book.delete()
     return {"success":True}
+
+@api.patch("/books/{book_id}",response=BookSchema)
+def edit_book(request,book_id:int,payload:BookPatchSchema):
+    book = get_object_or_404(Book,id=book_id)
+    for attr,value in payload.dict(exclude_unset=True).items():
+        setattr(book,attr,value)
+    book.save()
+    return book
