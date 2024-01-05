@@ -5,8 +5,9 @@ class AuthorSchema(ModelSchema):
     class Meta:
         model = Author
         fields = "__all__"
-        
+
 class BookSchema(ModelSchema):
+    author:AuthorSchema
     class Meta:
         model = Book
         fields = "__all__"
