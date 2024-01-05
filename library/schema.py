@@ -1,7 +1,7 @@
-from ninja import schema
+from ninja import Schema
 
 
-class BookSchema(schema):
+class BookSchema(Schema):
     id : int
     title : str
     author_id : int
