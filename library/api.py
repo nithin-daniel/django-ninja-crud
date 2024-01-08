@@ -5,6 +5,8 @@ from .schema import BookSchema,BookInSchema,BookPatchSchema
 from typing import List
 
 api = NinjaAPI()
+# Here the docs page title change
+api.title = "Ninja Crud"
 
 @api.get("/books/{book_id}",response=BookSchema)
 def book_details(request,book_id:int):
